@@ -36,6 +36,7 @@ const illustrationVariants = {
 export default function HeroSection() {
   const illustrationRef = useRef<HTMLDivElement>(null);
   const backgroundRef = useRef<HTMLDivElement>(null);
+  const heroSectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     if (!illustrationRef.current || !backgroundRef.current) return;
@@ -56,6 +57,23 @@ export default function HeroSection() {
         delay: 0.1 * index,
       });
     });
+    
+    // Ajustement dynamique de la hauteur pour accommoder le skyline
+    if (heroSectionRef.current) {
+      const updateHeight = () => {
+        const viewportHeight = window.innerHeight;
+        // Utiliser 90% de la hauteur de la fenêtre pour garantir que le skyline est visible
+        heroSectionRef.current!.style.minHeight = `${viewportHeight * 0.9}px`;
+      };
+      
+      // Exécuter immédiatement et lors des redimensionnements
+      updateHeight();
+      window.addEventListener('resize', updateHeight);
+      
+      return () => {
+        window.removeEventListener('resize', updateHeight);
+      };
+    }
 
     // Animation du fond avec un effet brillant
     gsap.to(background, {
@@ -81,7 +99,10 @@ export default function HeroSection() {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden py-16 md:py-24">
+    <section 
+      ref={heroSectionRef}
+      className="relative min-h-screen flex flex-col items-center justify-start overflow-visible py-16 md:py-20"
+    >
       {/* Fond artistique inspiré de Bigflo & Oli et du style urbain de Toulouse */}
       <div 
         ref={backgroundRef}
@@ -90,7 +111,7 @@ export default function HeroSection() {
           backgroundSize: '200% 200%',
           background: `
             linear-gradient(0deg, rgba(24,11,40,1) 0%, rgba(51,14,58,0.8) 50%, rgba(47,16,47,0.9) 100%),
-            url('/background-texture.webp')
+            url('/background/background-texture.webp')
           `
         }}
       >
@@ -230,20 +251,20 @@ export default function HeroSection() {
                         clip-path-polygon"></div>
           </motion.div>
         </div>
-
-        {/* Skyline de Toulouse */}
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 1 }}
-          className="mt-12 md:mt-24"
-        >
-          <ToulouseSkyline />
-        </motion.div>
-        
-        {/* Fading gradient */}
-        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#180B28] to-transparent z-0"></div>
       </div>
+      
+      {/* Skyline de Toulouse - intégré comme élément principal de la section */}
+      <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, delay: 0.5 }}
+        className="relative z-20 w-full max-w-7xl mx-auto px-4 mt-auto"
+        style={{ marginBottom: '-2rem' }}
+      >
+      </motion.div>
+      
+      {/* Transition vers la section suivante */}
+      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[#180B28] to-transparent z-10"></div>
     </section>
   );
 }

@@ -32,30 +32,23 @@ const services = [
     id: 'web',
     title: 'Développement Web',
     description: 'Sites vitrines, plateformes e-commerce et applications web sur-mesure avec les dernières technologies pour une expérience optimale.',
-    icon: '/icons/web-dev.svg',
+    icon: '/images/services/site-vitrine.jpg',
     color: 'var(--rose-toulouse)',
   },
   {
     id: 'mobile',
     title: 'Applications Mobiles',
     description: 'Applications mobiles natives et hybrides pour iOS et Android qui offrent une expérience utilisateur fluide et intuitive.',
-    icon: '/icons/mobile-dev.svg',
+    icon: '/images/services/mobile.jpg',
     color: 'var(--violet)',
   },
   {
     id: 'ecommerce',
     title: 'E-commerce',
     description: 'Solutions e-commerce performantes, sécurisées et optimisées pour transformer les visiteurs en clients fidèles.',
-    icon: '/icons/ecommerce.svg',
+    icon: '/images/services/e-commerce.jpg',
     color: 'var(--bleu)',
-  },
-  {
-    id: 'design',
-    title: 'UX/UI Design',
-    description: 'Interfaces utilisateur modernes et intuives, conçues pour offrir une expérience utilisateur exceptionnelle et mémorable.',
-    icon: '/icons/design.svg',
-    color: 'var(--dore)',
-  },
+  }
 ];
 
 export default function ServicesPreview() {
@@ -94,7 +87,7 @@ export default function ServicesPreview() {
         
         <motion.div 
           ref={ref}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+          className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto"
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
@@ -109,20 +102,23 @@ export default function ServicesPreview() {
             >
               {/* Icône avec effet de survol */}
               <div 
-                className="w-16 h-16 rounded-full mb-6 flex items-center justify-center
-                           group-hover:shadow-lg transition-all duration-300"
+                className="w-24 h-24 rounded-lg mb-6 overflow-hidden
+                           group-hover:shadow-lg transition-all duration-300 relative"
                 style={{ 
-                  background: `linear-gradient(135deg, ${service.color}40, ${service.color}10)`,
                   boxShadow: `0 0 20px ${service.color}30`
                 }}
               >
                 <Image
                   src={service.icon}
                   alt={service.title}
-                  width={32}
-                  height={32}
-                  className="w-8 h-8 group-hover:scale-110 transition-transform duration-300"
+                  width={120}
+                  height={120}
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                 />
+                <div 
+                  className="absolute inset-0 opacity-30 group-hover:opacity-20 transition-opacity duration-300"
+                  style={{ background: `linear-gradient(135deg, ${service.color}80, transparent)` }}
+                ></div>
               </div>
               
               <h3 

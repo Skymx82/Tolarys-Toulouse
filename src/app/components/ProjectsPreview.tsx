@@ -10,26 +10,26 @@ import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 const projects = [
   {
     id: 'project1',
-    title: 'E-commerce nouvelle génération',
+    title: 'E-commerce avec personnalisation',
     category: 'E-commerce',
-    description: 'Plateforme e-commerce à haute performance avec une expérience d\'achat immersive et intuitive.',
-    image: '/projects/ecommerce-project.webp',
+    description: 'Plateforme e-commerce à haute performance avec une expérience d\'achat immersive et intuitive. Ainsi que la possibilité de personnalisation des produits.',
+    image: '/images/projects/e-commerce.png',
     color: 'var(--rose-toulouse)'
   },
   {
     id: 'project2',
-    title: 'Application mobile fitness',
-    category: 'Mobile',
-    description: 'Application de suivi d\'activité physique avec des fonctionnalités sociales et une interface engageante.',
-    image: '/projects/mobile-project.webp',
+    title: 'Application Web de gestion d\'auto école',
+    category: 'Web App',
+    description: 'Application Web qui facilite la gestion des insciprtion, planning moniteur, examens, etc.',
+    image: '/images/projects/auto-ecole.png',
     color: 'var(--violet)'
   },
   {
     id: 'project3',
-    title: 'Plateforme événementielle',
-    category: 'Web App',
-    description: 'Système de gestion d\'événements complet avec billetterie et interactions en temps réel.',
-    image: '/projects/webapp-project.webp',
+    title: 'Site Vitrine Gagnant du Sites of the days',
+    category: 'Site Web',
+    description: 'Portfolio réalisé en collaboration avec un designer qui a remporté le prix du site du jour.',
+    image: '/images/projects/portfolio.png',
     color: 'var(--bleu)'
   },
 ];
@@ -76,23 +76,42 @@ export default function ProjectsPreview() {
       });
     }
 
-    // Animation des images au survol
+    // Animation des éléments au survol
     projects.forEach((project) => {
       const image = project.querySelector('.project-image');
+      const title = project.querySelector('h3');
+      const category = project.querySelector('.category-badge');
       
       project.addEventListener('mouseenter', () => {
-        gsap.to(image, {
-          scale: 1.05,
-          duration: 0.5,
+        // L'animation de l'image est maintenant gérée par CSS (group-hover:scale-105)
+        // Animation du titre
+        gsap.to(title, {
+          y: -5,
+          duration: 0.4,
           ease: "power2.out"
+        });
+        
+        // Animation du badge de catégorie
+        gsap.to(category, {
+          scale: 1.05,
+          duration: 0.3,
+          ease: "back.out"
         });
       });
       
       project.addEventListener('mouseleave', () => {
-        gsap.to(image, {
-          scale: 1,
-          duration: 0.5,
+        // Animation du titre
+        gsap.to(title, {
+          y: 0,
+          duration: 0.4,
           ease: "power2.out"
+        });
+        
+        // Animation du badge de catégorie
+        gsap.to(category, {
+          scale: 1,
+          duration: 0.3,
+          ease: "back.out"
         });
       });
     });
@@ -177,48 +196,67 @@ export default function ProjectsPreview() {
                 }}
               >
                 {/* Image de fond du projet */}
-                <div className="absolute inset-0 opacity-30 toulouse-overlay">
-                  <div className="project-image w-full h-full transition-transform duration-700">
-                    <Image
-                      src={project.image}
-                      alt={project.title}
-                      fill
-                      objectFit="cover"
-                    />
-                  </div>
+                <div className="absolute inset-0 z-0">
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full h-full object-cover opacity-30 group-hover:opacity-40 transition-all duration-500"
+                  />
                 </div>
                 
-                {/* Overlay gradient */}
+                {/* Overlay gradient personnalisé selon la couleur du projet */}
                 <div 
-                  className="absolute inset-0"
+                  className="absolute inset-0 z-0 transition-opacity duration-500 group-hover:opacity-80"
                   style={{ 
-                    background: `linear-gradient(to top, rgba(24, 11, 40, 0.9), rgba(24, 11, 40, 0.5) 50%, rgba(24, 11, 40, 0.3))` 
+                    background: `linear-gradient(135deg, ${project.color}10 0%, rgba(24, 11, 40, 0.7) 50%, rgba(24, 11, 40, 0.9) 100%)` 
                   }}
                 ></div>
                 
                 {/* Contenu du projet */}
-                <div className="relative h-full flex flex-col justify-end p-8 md:p-12">
+                <div className="relative h-full flex flex-col justify-end p-8 md:p-12 z-10">
+                  {/* Effet de trait fluo derrière les éléments de texte */}
+                  <div className="absolute bottom-0 left-0 right-0 h-2/3 bg-gradient-to-t from-black/100 to-transparent z-0"></div>
+                  
                   <span 
-                    className="inline-block px-4 py-1 rounded-full text-sm font-medium mb-4"
+                    className="category-badge relative z-10 inline-block px-4 py-1 rounded-full text-sm font-medium mb-4 transition-all duration-300"
                     style={{ 
-                      backgroundColor: `${project.color}20`,
+                      backgroundColor: `${project.color}30`,
                       color: project.color,
-                      border: `1px solid ${project.color}40`
+                      border: `1px solid ${project.color}50`,
+                      boxShadow: `0 0 15px ${project.color}40`
                     }}
                   >
                     {project.category}
                   </span>
                   
-                  <h3 
-                    className="text-2xl md:text-3xl font-bold text-white mb-4 group-hover:text-dore transition-colors duration-300"
-                    style={{ fontFamily: 'var(--font-display)' }}
-                  >
-                    {project.title}
-                  </h3>
+                  <div className="relative z-10 mb-4">
+                    <div 
+                      className="absolute -inset-1 rounded-lg opacity-70" 
+                      style={{ 
+                        background: `linear-gradient(45deg, transparent, ${project.color}30, transparent)`,
+                        filter: 'blur(8px)',
+                      }}
+                    ></div>
+                    <h3 
+                      className="relative text-2xl md:text-3xl font-bold text-white group-hover:text-dore transition-colors duration-300"
+                      style={{ fontFamily: 'var(--font-display)', textShadow: '0 0 10px rgba(0,0,0,0.5)' }}
+                    >
+                      {project.title}
+                    </h3>
+                  </div>
                   
-                  <p className="text-gray-300 mb-8 md:text-lg max-w-xl">
-                    {project.description}
-                  </p>
+                  <div className="relative z-10 mb-8">
+                    <div 
+                      className="absolute -inset-2 rounded-lg opacity-50" 
+                      style={{ 
+                        background: 'rgba(0,0,0,0.6)',
+                        backdropFilter: 'blur(4px)',
+                      }}
+                    ></div>
+                    <p className="relative text-gray-200 md:text-lg max-w-xl">
+                      {project.description}
+                    </p>
+                  </div>
                   
                   <a 
                     href={`/portfolio#${project.id}`}

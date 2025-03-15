@@ -63,22 +63,6 @@ const servicesData = [
     image: '/services/mobile-development.jpg'
   },
   {
-    id: 'ux-design',
-    title: 'Design UX/UI',
-    icon: '/icons/design-icon.svg',
-    color: 'var(--bleu)',
-    description: 'Une approche centrée utilisateur pour créer des interfaces intuitives et esthétiques qui engagent votre audience.',
-    features: [
-      'Recherche utilisateur et personas',
-      'Wireframing et prototypage',
-      'Design d\'interfaces utilisateur',
-      'Tests utilisateur',
-      'Design systems'
-    ],
-    technologies: ['Figma', 'Adobe XD', 'Sketch', 'Principle', 'InVision'],
-    image: '/services/ux-design.jpg'
-  },
-  {
     id: 'ecommerce',
     title: 'Solutions E-commerce',
     icon: '/icons/ecommerce-icon.svg',
@@ -93,22 +77,6 @@ const servicesData = [
     ],
     technologies: ['Shopify', 'WooCommerce', 'PrestaShop', 'Magento', 'Stripe', 'PayPal'],
     image: '/services/ecommerce.jpg'
-  },
-  {
-    id: 'consulting',
-    title: 'Conseil & Stratégie Digitale',
-    icon: '/icons/consulting-icon.svg',
-    color: 'var(--rose-toulouse)',
-    description: 'Un accompagnement personnalisé pour définir et mettre en œuvre votre stratégie digitale et maximiser votre présence en ligne.',
-    features: [
-      'Audit digital et technique',
-      'Définition de roadmap digitale',
-      'Conseil en architecture technique',
-      'Optimisation des performances',
-      'Formation des équipes'
-    ],
-    technologies: [],
-    image: '/services/consulting.jpg'
   },
   {
     id: 'maintenance',

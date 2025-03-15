@@ -100,7 +100,7 @@ export default function Navbar() {
         <motion.div variants={logoVariants} initial="initial" animate="animate">
           <Link href="/" className="flex items-center gap-2">
             <Image
-              src="/logo.svg"
+              src="/logo.png"
               alt="Tolarys Logo"
               width={40}
               height={40}

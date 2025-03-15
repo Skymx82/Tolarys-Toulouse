@@ -64,7 +64,7 @@ export default function AboutPreview() {
           >
             <div className="toulouse-overlay rounded-lg overflow-hidden">
               <Image
-                src="/toulouse-capitole.webp"
+                src="/images/about/capitole.png"
                 alt="Toulouse - Place du Capitole"
                 width={600}
                 height={400}

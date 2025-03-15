@@ -2,9 +2,41 @@
 
 import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import gsap from 'gsap';
 
-// Les monuments emblématiques de Toulouse stylisés avec un effet "néon" 
+// Configuration des monuments
+const monuments = [
+  {
+    name: 'Capitole',
+    image: '/images/monuments/capitole.png',
+    width: 'w-32 md:w-48',
+    height: 'h-24 md:h-32',
+    gradient: 'from-rose-toulouse/40 to-violet/40'
+  },
+  {
+    name: 'Basilique Saint-Sernin',
+    image: '/images/monuments/saint-sernin.png',
+    width: 'w-24 md:w-32',
+    height: 'h-32 md:h-40',
+    gradient: 'from-violet/40 to-dore/40'
+  },
+  {
+    name: 'Pont Neuf',
+    image: '/images/monuments/pont-neuf.png',
+    width: 'w-48 md:w-64',
+    height: 'h-20 md:h-24',
+    gradient: 'from-rose-toulouse/40 to-bleu/40'
+  },
+  {
+    name: 'Cité de l\'Espace',
+    image: '/images/monuments/cite-espace.png',
+    width: 'w-16 md:w-24',
+    height: 'h-32 md:h-40',
+    gradient: 'from-bleu/40 to-dore/40'
+  }
+];
+
 export default function ToulouseSkyline() {
   const skylineRef = useRef<HTMLDivElement>(null);
 
@@ -13,26 +45,41 @@ export default function ToulouseSkyline() {
     
     const skyline = skylineRef.current;
     const elements = skyline.querySelectorAll('.monument');
+    const reflection = skyline.querySelector('.reflection');
     
-    // Animation des monuments avec GSAP
+    // Animation d'apparition des monuments
     gsap.fromTo(
       elements,
       { 
         opacity: 0,
-        y: 50
+        y: 50,
+        scale: 0.95
       },
       { 
         opacity: 1,
         y: 0,
+        scale: 1,
         stagger: 0.2,
-        duration: 1,
+        duration: 1.2,
         ease: "power3.out"
       }
     );
 
-    // Animation continue de "pulsation" des monuments
+    // Animation continue de "flottement" des monuments
+    elements.forEach((el, index) => {
+      gsap.to(el, {
+        y: '+=10',
+        duration: 2 + Math.random(),
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+        delay: index * 0.2
+      });
+    });
+
+    // Animation de l'effet néon
     gsap.to(elements, {
-      filter: "drop-shadow(0 0 8px var(--rose-toulouse)) drop-shadow(0 0 12px var(--violet))",
+      filter: "drop-shadow(0 0 10px var(--rose-toulouse)) drop-shadow(0 0 15px var(--violet))",
       duration: 2,
       repeat: -1,
       yoyo: true,
@@ -43,63 +90,62 @@ export default function ToulouseSkyline() {
       }
     });
 
+    // Animation du reflet sur l'eau
+    if (reflection) {
+      gsap.to(reflection, {
+        opacity: 0.7,
+        duration: 3,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut"
+      });
+    }
+
   }, []);
 
   return (
     <div 
       ref={skylineRef} 
-      className="w-full h-24 md:h-32 relative overflow-hidden mt-12"
+      className="w-full h-64 md:h-96 relative overflow-visible"
+      style={{
+        marginBottom: '2rem',
+        paddingBottom: '2rem',
+      }}
     >
-      <div className="absolute bottom-0 left-0 w-full flex justify-around items-end">
-        {/* Le Capitole */}
-        <motion.div 
-          className="monument h-20 md:h-28 w-16 md:w-24 relative"
-          initial={{ opacity: 0, y: 50 }}
-        >
-          <div className="absolute bottom-0 w-full bg-gradient-to-t from-rose-toulouse to-violet opacity-80 h-full rounded-t-lg">
-            <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-3/4 h-1/2 border-t-2 border-l-2 border-r-2 border-white/50 rounded-t-lg"></div>
-            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1/3 h-1/4 border-t-2 border-l-2 border-r-2 border-white/50 rounded-t-sm"></div>
-          </div>
-        </motion.div>
-        
-        {/* La Basilique Saint-Sernin */}
-        <motion.div 
-          className="monument h-24 md:h-32 w-12 md:w-16 relative"
-          initial={{ opacity: 0, y: 50 }}
-        >
-          <div className="absolute bottom-0 w-full bg-gradient-to-t from-violet to-dore opacity-80 h-full">
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/3 h-1/4 bg-dore/80 rounded-full"></div>
-            <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-2/3 h-3/4 border-t-2 border-l-2 border-r-2 border-white/50 rounded-t-lg"></div>
-          </div>
-        </motion.div>
-        
-        {/* Le Pont Neuf */}
-        <motion.div 
-          className="monument h-12 md:h-16 w-32 md:w-48 relative"
-          initial={{ opacity: 0, y: 50 }}
-        >
-          <div className="absolute bottom-0 w-full bg-gradient-to-r from-rose-toulouse to-bleu opacity-80 h-1/3 rounded-t-sm">
-            <div className="flex justify-around w-full">
-              {[...Array(5)].map((_, i) => (
-                <div key={i} className="w-2 h-8 md:h-10 bg-white/50 rounded-t-sm"></div>
-              ))}
+      {/* Arrière-plan du ciel nocturne */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#180B28]/0 to-[#180B28]/50 z-0"></div>
+      
+      {/* Conteneur des monuments avec espacement amélioré */}
+      <div className="absolute bottom-16 left-0 w-full flex justify-around items-end z-10">
+        {monuments.map((monument, index) => (
+          <motion.div 
+            key={monument.name}
+            className={`monument relative ${monument.width} ${monument.height}`}
+            initial={{ opacity: 0, y: 50, scale: 0.95 }}
+          >
+            <div className={`absolute bottom-0 w-full h-full overflow-visible
+                          rounded-lg bg-gradient-to-t ${monument.gradient}`}>
+              <Image
+                src={monument.image}
+                alt={monument.name}
+                fill
+                className="object-contain mix-blend-screen"
+                priority
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
             </div>
-          </div>
-        </motion.div>
-        
-        {/* La Tour de la Cité de l'Espace */}
-        <motion.div 
-          className="monument h-24 md:h-32 w-6 md:w-8 relative"
-          initial={{ opacity: 0, y: 50 }}
-        >
-          <div className="absolute bottom-0 w-full bg-gradient-to-t from-bleu to-dore opacity-80 h-full rounded-t-3xl">
-            <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-full h-1/4 bg-dore/50 rounded-full"></div>
-          </div>
-        </motion.div>
+          </motion.div>
+        ))}
       </div>
       
-      {/* Reflet lumineux sur l'eau (la Garonne) */}
-      <div className="absolute bottom-0 left-0 w-full h-4 bg-gradient-to-r from-rose-toulouse/30 via-violet/30 to-bleu/30 blur-sm"></div>
+      {/* Reflet lumineux sur l'eau (la Garonne) - amélioré */}
+      <div className="reflection absolute bottom-0 left-0 w-full h-16 
+                    bg-gradient-to-r from-rose-toulouse/30 via-violet/30 to-bleu/30 
+                    blur-md z-5"></div>
+      
+      {/* Ligne d'horizon */}
+      <div className="absolute bottom-16 left-0 w-full h-px 
+                   bg-gradient-to-r from-transparent via-violet/50 to-transparent z-10"></div>
     </div>
   );
 }

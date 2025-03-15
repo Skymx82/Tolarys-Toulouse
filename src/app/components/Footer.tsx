@@ -40,9 +40,9 @@ export default function Footer() {
       {/* Éléments décoratifs inspirés de l'univers toulousain */}
       <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-rose-toulouse via-violet to-dore"></div>
       
-      <div className="absolute opacity-5 top-0 right-0">
+      <div className="absolute opacity-25 top-0 right-0">
         <Image
-          src="/toulouse-skyline.svg"
+          src="/images/backgrounds/toulouse-back.png"
           alt="Skyline de Toulouse"
           width={500}
           height={200}
@@ -55,7 +55,7 @@ export default function Footer() {
           <motion.div variants={itemVariants} className="col-span-1 lg:col-span-1">
             <Link href="/" className="flex items-center gap-2 mb-4">
               <Image
-                src="/logo.svg"
+                src="/logo.png"
                 alt="Tolarys Logo"
                 width={40}
                 height={40}
@@ -164,7 +164,7 @@ export default function Footer() {
             
             {/* Réseaux sociaux */}
             <div className="mt-6 flex gap-4">
-              <a href="#" className="text-gray-300 hover:text-rose-toulouse transition-colors">
+              <a href="https://www.facebook.com/tolarystoulouse" className="text-gray-300 hover:text-rose-toulouse transition-colors">
                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path fillRule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clipRule="evenodd"></path>
                 </svg>

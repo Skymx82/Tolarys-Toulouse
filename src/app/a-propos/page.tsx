@@ -236,7 +236,7 @@ export default function About() {
               >
                 <div className="relative z-10 rounded-lg overflow-hidden border-4 border-white/10 shadow-2xl">
                   <Image
-                    src="/about/tolarys-story.jpg"
+                    src="/images/about/tolarys-story.jpg"
                     alt="L'équipe Tolarys"
                     width={600}
                     height={400}
