@@ -31,6 +31,10 @@ export const metadata: Metadata = {
   alternates: {
     canonical: 'https://tolarys-toulouse.fr',
   },
+  icons: {
+    icon: '/logo.png',
+    apple: '/logo.png',
+  },
   openGraph: {
     title: 'Tolarys | Création de Sites Web & Mobile à Toulouse - Agence Web Professionnelle',
     description: 'Agence de création de sites web à Toulouse ✓ Sites sur-mesure ✓ E-commerce ✓ Responsive ✓ SEO local ✓ Devis gratuit',
@@ -38,6 +42,14 @@ export const metadata: Metadata = {
     siteName: 'Tolarys Toulouse',
     locale: 'fr_FR',
     type: 'website',
+    images: [
+      {
+        url: 'https://tolarys-toulouse.fr/logo.png',
+        width: 800,
+        height: 600,
+        alt: 'Logo Tolarys Toulouse',
+      }
+    ],
   },
   twitter: {
     card: 'summary_large_image',
@@ -74,6 +86,8 @@ export default function RootLayout({
         <meta name="ICBM" content="43.604652, 1.444209" />
         <meta name="google-site-verification" content="HC3bLk9DOOzJGj0bHYYFVZrZhzAEKDkSJpekq3ggU68" />
         <link rel="alternate" hrefLang="fr-fr" href="https://tolarys-toulouse.fr" />
+        <link rel="icon" type="image/png" href="/logo.png" />
+        <link rel="apple-touch-icon" href="/logo.png" />
       </head>
       <body
         className={`${montserrat.variable} ${outfit.variable} ${dancingScript.variable} antialiased`}
