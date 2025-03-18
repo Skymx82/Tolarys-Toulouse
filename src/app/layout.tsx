@@ -32,8 +32,19 @@ export const metadata: Metadata = {
     canonical: 'https://tolarys-toulouse.fr',
   },
   icons: {
-    icon: '/logo.png',
-    apple: '/logo.png',
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/logo.png', type: 'image/png' },
+      { url: '/images/logos/logo.png', type: 'image/png' }
+    ],
+    shortcut: '/logo.png',
+    apple: [
+      { url: '/apple-icon.png', sizes: '180x180', type: 'image/png' },
+      { url: '/logo.png', sizes: 'any', type: 'image/png' }
+    ],
+    other: [
+      { rel: 'mask-icon', url: '/logo.png' }
+    ]
   },
   openGraph: {
     title: 'Tolarys | Création de Sites Web & Mobile à Toulouse - Agence Web Professionnelle',
@@ -86,8 +97,22 @@ export default function RootLayout({
         <meta name="ICBM" content="43.604652, 1.444209" />
         <meta name="google-site-verification" content="HC3bLk9DOOzJGj0bHYYFVZrZhzAEKDkSJpekq3ggU68" />
         <link rel="alternate" hrefLang="fr-fr" href="https://tolarys-toulouse.fr" />
-        <link rel="icon" type="image/png" href="/logo.png" />
-        <link rel="apple-touch-icon" href="/logo.png" />
+        
+        {/* Favicons pour tous les navigateurs et appareils */}
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/logo.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/logo.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/logo.png" />
+        <link rel="mask-icon" href="/logo.png" color="#5bbad5" />
+        <meta name="msapplication-TileImage" content="/logo.png" />
+        <meta name="msapplication-TileColor" content="#da532c" />
+        <meta name="msapplication-config" content="/browserconfig.xml" />
+        <meta name="theme-color" content="#ffffff" />
+        
+        {/* Autres balises pour assurer la visibilité du logo */}
+        <link rel="shortcut icon" href="/logo.png" />
+        <link rel="fluid-icon" href="/logo.png" title="Tolarys Toulouse" />
+        <link rel="manifest" href="/manifest.json" />
       </head>
       <body
         className={`${montserrat.variable} ${outfit.variable} ${dancingScript.variable} antialiased`}
