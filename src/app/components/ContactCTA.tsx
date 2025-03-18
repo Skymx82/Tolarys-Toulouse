@@ -2,6 +2,7 @@
 
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
+import Link from 'next/link';
 
 // Variantes d'animation
 const containerVariants = {
@@ -27,7 +28,7 @@ const itemVariants = {
 
 export default function ContactCTA() {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: false, amount: 0.3 });
+  const isInView = useInView(ref, { once: true, amount: 0.3 });
 
   return (
     <section 
@@ -38,7 +39,7 @@ export default function ContactCTA() {
       }}
     >
       {/* Éléments graphiques de fond inspirés des quartiers de Toulouse */}
-      <div className="absolute inset-0 overflow-hidden">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none" style={{ zIndex: 0 }}>
         <div className="absolute inset-0 opacity-5">
           <svg width="100%" height="100%" viewBox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg">
             <defs>
@@ -58,9 +59,9 @@ export default function ContactCTA() {
         </div>
       </div>
       
-      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-rose-toulouse via-violet to-bleu"></div>
+      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-rose-toulouse via-violet to-bleu pointer-events-none"></div>
       
-      <div className="container mx-auto px-4 md:px-6">
+      <div className="container mx-auto px-4 md:px-6 relative z-10">
         <motion.div 
           className="max-w-3xl mx-auto text-center space-y-8"
           variants={containerVariants}
@@ -96,22 +97,27 @@ export default function ContactCTA() {
             className="flex flex-col sm:flex-row gap-4 pt-6 justify-center"
             variants={itemVariants}
           >
+            <Link href="/contact" className="block relative z-20">
+              <div 
+                className="inline-flex items-center justify-center px-8 py-4 border border-transparent 
+                         text-base font-medium rounded-md text-white bg-dore hover:bg-opacity-90
+                         transition-all shadow-lg hover:shadow-dore/30 cursor-pointer relative z-20"
+                role="button"
+                aria-label="Nous contacter"
+              >
+                <span className="text-gradient bg-gradient-to-r from-rose-toulouse via-violet to-bleu">Nous contacter</span>
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd"/>
+                </svg>
+              </div>
+            </Link>
             <a 
-              href="/contact" 
-              className="inline-flex items-center justify-center px-8 py-4 border border-transparent 
-                       text-base font-medium rounded-md text-white bg-dore hover:bg-opacity-90
-                       transition-all shadow-lg hover:shadow-dore/30"
-            >
-              <span className="text-gradient bg-gradient-to-r from-rose-toulouse via-violet to-bleu">Nous contacter</span>
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
-                <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd"/>
-              </svg>
-            </a>
-            <a 
-              href="tel:+33612345678" 
+              href="tel:+33679336812" 
               className="inline-flex items-center justify-center px-8 py-4 border border-dore
                        text-base font-medium rounded-md text-white hover:bg-dore/10 
-                       transition-all"
+                       transition-all cursor-pointer relative z-20"
+              role="button"
+              aria-label="Appeler"
             >
               <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
                 <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />

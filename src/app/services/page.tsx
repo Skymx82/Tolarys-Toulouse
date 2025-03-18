@@ -44,7 +44,7 @@ const servicesData = [
       'Progressive Web Apps (PWA)'
     ],
     technologies: ['React', 'Next.js', 'Vue.js', 'Node.js', 'PHP', 'Laravel', 'WordPress'],
-    image: '/services/web-development.jpg'
+    image: '/images/services/web.jpg'
   },
   {
     id: 'mobile-dev',
@@ -60,7 +60,7 @@ const servicesData = [
       'Mise à jour et maintenance'
     ],
     technologies: ['React Native', 'Flutter', 'Swift', 'Kotlin', 'Firebase'],
-    image: '/services/mobile-development.jpg'
+    image: '/images/services/dev-mobile.jpg'
   },
   {
     id: 'ecommerce',
@@ -76,7 +76,7 @@ const servicesData = [
       'Systèmes de gestion des stocks'
     ],
     technologies: ['Shopify', 'WooCommerce', 'PrestaShop', 'Magento', 'Stripe', 'PayPal'],
-    image: '/services/ecommerce.jpg'
+    image: '/images/services/ecommerce.jpg'
   },
   {
     id: 'maintenance',
@@ -92,7 +92,7 @@ const servicesData = [
       'Sauvegardes et restauration'
     ],
     technologies: [],
-    image: '/services/maintenance.jpg'
+    image: '/images/services/maintenance.jpg'
   }
 ];
 
@@ -479,8 +479,8 @@ export default function Services() {
                 <a 
                   href="/contact" 
                   className="inline-flex items-center justify-center px-8 py-4 border border-transparent 
-                           text-base font-medium rounded-md text-black bg-dore hover:bg-opacity-90
-                           transition-all shadow-lg hover:shadow-dore/30"
+                           text-base font-medium rounded-md text-white bg-dore hover:bg-opacity-90
+                           transition-all shadow-lg hover:shadow-dore/30 text-gradient bg-gradient-to-r from-rose-toulouse via-violet to-bleu z-30"
                 >
                   Nous contacter
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
@@ -492,7 +492,7 @@ export default function Services() {
                   href="/portfolio" 
                   className="inline-flex items-center justify-center px-8 py-4 border border-dore
                            text-base font-medium rounded-md text-white hover:bg-dore/10 
-                           transition-all"
+                           transition-all z-30"
                 >
                   Voir nos réalisations
                 </a>

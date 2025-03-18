@@ -37,29 +37,11 @@ const imageVariants = {
 // Membres de l'équipe
 const teamMembers = [
   {
-    name: 'Thomas Laforge',
+    name: 'Mathevon Mattias',
     role: 'Fondateur & Développeur Full-Stack',
-    image: '/team/team-placeholder-1.jpg',
-    bio: 'Passionné par le web depuis plus de 10 ans, Thomas a fondé Tolarys avec la vision de créer des expériences digitales uniques qui allient performance technique et créativité.'
+    image: '/images/team/mattias.png',
+    bio: 'Passionné de programmation depuis l\' age de 11 ans, Mattias a fondé Tolarys avec la vision de créer des expériences digitales uniques qui allient performance technique et créativité.'
   },
-  {
-    name: 'Émilie Dumas',
-    role: 'Directrice Artistique',
-    image: '/team/team-placeholder-2.jpg',
-    bio: 'Avec une formation aux Beaux-Arts de Toulouse, Émilie apporte sa sensibilité artistique et sa connaissance de la culture locale à chaque projet.'
-  },
-  {
-    name: 'Romain Petit',
-    role: 'Développeur Mobile',
-    image: '/team/team-placeholder-3.jpg',
-    bio: 'Expert en développement d\'applications mobiles natives et cross-platform, Romain assure la qualité et les performances de nos solutions mobiles.'
-  },
-  {
-    name: 'Sarah Martinez',
-    role: 'UX Designer',
-    image: '/team/team-placeholder-4.jpg',
-    bio: 'Spécialiste de l\'expérience utilisateur, Sarah conçoit des interfaces intuitives et engageantes en plaçant l\'utilisateur au centre de chaque décision.'
-  }
 ];
 
 // Valeurs de l'entreprise

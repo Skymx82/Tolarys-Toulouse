@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Permettre à tous les robots d'accéder à tout le contenu
+Disallow: /api/
+Disallow: /_next/
+
+# Sitemap
+Sitemap: https://tolarys-toulouse.fr/sitemap.xml
