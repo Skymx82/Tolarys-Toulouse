@@ -5,6 +5,7 @@ import { motion, useInView } from 'framer-motion';
 import Image from 'next/image';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+import { ScrollToPlugin } from 'gsap/dist/ScrollToPlugin';
 
 // Définition des projets à mettre en avant
 const projects = [
@@ -64,8 +65,8 @@ export default function ProjectsPreview() {
   useEffect(() => {
     if (typeof window === 'undefined' || !projectsRef.current) return;
 
-    // Enregistrement du plugin ScrollTrigger
-    gsap.registerPlugin(ScrollTrigger);
+    // Enregistrement des plugins GSAP
+    gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
     
     // Ajouter un écouteur d'événement pour le redimensionnement
     window.addEventListener('resize', handleResize);
@@ -95,6 +96,15 @@ export default function ProjectsPreview() {
           // Désactiver le pin sur mobile en mode portrait si nécessaire
           pinSpacing: true,
           invalidateOnRefresh: true, // Recalculer lors du redimensionnement
+          start: "top 15%", // Commencer le défilement plus tôt (15% du haut de la fenêtre)
+          anticipatePin: 1, // Anticiper le pin pour une transition plus fluide
+          onEnter: () => {
+            // Ajuster le scroll pour éviter les sauts brusques
+            if (projectsRef.current) {
+              const sectionTop = projectsRef.current.getBoundingClientRect().top + window.scrollY;
+              gsap.to(window, {duration: 0.1, scrollTo: {y: sectionTop - window.innerHeight * 0.15}});
+            }
+          }
         },
       });
     }
@@ -149,7 +159,8 @@ export default function ProjectsPreview() {
   return (
     <section 
       ref={sectionRef}
-      className="py-16 md:py-24 relative overflow-hidden bg-gradient-to-b from-[#1A0B22] to-[#180B28]"
+      className="py-12 md:py-16 relative overflow-hidden bg-gradient-to-b from-[#1A0B22] to-[#180B28]"
+      id="projects-section" // Ajouter un ID pour faciliter le ciblage
     >
       {/* Éléments graphiques de fond */}
       <div className="absolute -top-20 -left-20 w-80 h-80 rounded-full bg-bleu/5 blur-3xl"></div>
@@ -205,6 +216,7 @@ export default function ProjectsPreview() {
       <div 
         ref={projectsRef}
         className="relative h-[450px] sm:h-[500px] md:h-[550px] lg:h-[600px] overflow-hidden"
+        style={{ marginTop: '2rem' }} // Ajouter un peu d'espace avant la section pour améliorer la visibilité
       >
         <div className="absolute top-0 left-0 flex items-center h-full">
           {projects.map((project, index) => (
