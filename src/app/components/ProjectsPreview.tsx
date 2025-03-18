@@ -51,6 +51,14 @@ export default function ProjectsPreview() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const projectsRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(sectionRef, { once: false, amount: 0.1 });
+  
+  // Fonction pour gérer le redimensionnement de la fenêtre
+  const handleResize = () => {
+    if (typeof window === 'undefined' || !projectsRef.current) return;
+    
+    // Rafraîchir tous les ScrollTriggers pour s'adapter à la nouvelle taille
+    ScrollTrigger.refresh();
+  };
 
   // Initialisation de GSAP ScrollTrigger pour l'effet de scrolling cinématique
   useEffect(() => {
@@ -59,19 +67,34 @@ export default function ProjectsPreview() {
     // Enregistrement du plugin ScrollTrigger
     gsap.registerPlugin(ScrollTrigger);
     
+    // Ajouter un écouteur d'événement pour le redimensionnement
+    window.addEventListener('resize', handleResize);
+    
     // Sélection des éléments de projet
     const projects = projectsRef.current.querySelectorAll('.project-card');
     
-    // Animation horizontale au scroll
+    // Détection de la taille d'écran pour adapter l'animation
+    const isMobile = window.innerWidth < 768;
+    const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
+    
+    // Animation horizontale au scroll adaptée selon la taille d'écran
     if (projectsRef.current) {
+      // Calcul dynamique de la distance à parcourir en fonction du nombre de projets et de la taille d'écran
+      const totalDistance = isMobile ? -100 * (projects.length - 0.8) : 
+                           isTablet ? -100 * (projects.length - 0.9) : 
+                           -100 * (projects.length - 1);
+      
       gsap.to(projects, {
-        xPercent: -100 * (projects.length - 1),
+        xPercent: totalDistance,
         ease: "none",
         scrollTrigger: {
           trigger: projectsRef.current,
           pin: true,
-          scrub: 1,
-          end: () => "+=" + (projectsRef.current?.offsetWidth || 0),
+          scrub: isMobile ? 0.8 : 1, // Ajustement de la fluidité pour mobile
+          end: () => "+=" + ((projectsRef.current?.offsetWidth || 0) * (isMobile ? 0.8 : isTablet ? 0.9 : 1)),
+          // Désactiver le pin sur mobile en mode portrait si nécessaire
+          pinSpacing: true,
+          invalidateOnRefresh: true, // Recalculer lors du redimensionnement
         },
       });
     }
@@ -118,6 +141,7 @@ export default function ProjectsPreview() {
 
     // Nettoyage
     return () => {
+      window.removeEventListener('resize', handleResize);
       ScrollTrigger.getAll().forEach(t => t.kill());
     };
   }, []);
@@ -180,13 +204,13 @@ export default function ProjectsPreview() {
       {/* Section horizontale avec effet de scrolling cinématique */}
       <div 
         ref={projectsRef}
-        className="relative h-[500px] md:h-[600px] overflow-hidden"
+        className="relative h-[450px] sm:h-[500px] md:h-[550px] lg:h-[600px] overflow-hidden"
       >
         <div className="absolute top-0 left-0 flex items-center h-full">
           {projects.map((project, index) => (
             <div 
               key={project.id}
-              className="project-card flex-shrink-0 w-[85vw] md:w-[75vw] lg:w-[65vw] h-full px-4 md:px-8"
+              className="project-card flex-shrink-0 w-[90vw] sm:w-[85vw] md:w-[75vw] lg:w-[65vw] xl:w-[55vw] h-full px-4 md:px-8"
             >
               <div 
                 className="h-full rounded-2xl overflow-hidden relative group hover-scale backdrop-blur-sm"
@@ -213,7 +237,7 @@ export default function ProjectsPreview() {
                 ></div>
                 
                 {/* Contenu du projet */}
-                <div className="relative h-full flex flex-col justify-end p-8 md:p-12 z-10">
+                <div className="relative h-full flex flex-col justify-end p-6 sm:p-8 md:p-10 lg:p-12 z-10">
                   {/* Effet de trait fluo derrière les éléments de texte */}
                   <div className="absolute bottom-0 left-0 right-0 h-2/3 bg-gradient-to-t from-black/100 to-transparent z-0"></div>
                   
@@ -238,7 +262,7 @@ export default function ProjectsPreview() {
                       }}
                     ></div>
                     <h3 
-                      className="relative text-2xl md:text-3xl font-bold text-white group-hover:text-dore transition-colors duration-300"
+                      className="relative text-xl sm:text-2xl md:text-3xl font-bold text-white group-hover:text-dore transition-colors duration-300"
                       style={{ fontFamily: 'var(--font-display)', textShadow: '0 0 10px rgba(0,0,0,0.5)' }}
                     >
                       {project.title}
@@ -253,26 +277,26 @@ export default function ProjectsPreview() {
                         backdropFilter: 'blur(4px)',
                       }}
                     ></div>
-                    <p className="relative text-gray-200 md:text-lg max-w-xl">
+                    <p className="relative text-sm sm:text-base md:text-lg max-w-xl">
                       {project.description}
                     </p>
                   </div>
                   
                   <a 
-                    href={`/portfolio#${project.id}`}
+                    href={`/portfolio/${project.id}`}
                     className="inline-flex items-center text-white bg-gradient-to-r from-rose-toulouse to-violet
-                             px-6 py-3 rounded-md hover:from-violet hover:to-rose-toulouse
-                             transition-all duration-500 shadow-lg hover:shadow-rose-toulouse/30 w-fit"
+                             px-4 py-2 sm:px-5 sm:py-2.5 md:px-6 md:py-3 rounded-md hover:from-violet hover:to-rose-toulouse
+                             transition-all duration-500 shadow-lg hover:shadow-rose-toulouse/30 w-fit z-50 text-sm sm:text-base"
                   >
                     Voir le projet
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 sm:h-5 sm:w-5 ml-1.5 sm:ml-2" viewBox="0 0 20 20" fill="currentColor">
                       <path fillRule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
                     </svg>
                   </a>
                   
                   {/* Numéro du projet avec effet néon */}
                   <div 
-                    className="absolute top-8 right-8 text-8xl font-bold opacity-20 neon-text"
+                    className="absolute top-6 sm:top-8 right-6 sm:right-8 text-6xl sm:text-7xl md:text-8xl font-bold opacity-20 neon-text"
                     style={{ fontFamily: 'var(--font-display)' }}
                   >
                     {index + 1}
