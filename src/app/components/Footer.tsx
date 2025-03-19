@@ -188,12 +188,19 @@ export default function Footer() {
           </motion.div>
         </div>
         
-        {/* Copyright */}
+        {/* Copyright et mentions légales */}
         <motion.div 
           variants={itemVariants}
           className="border-t border-gray-800 mt-12 pt-6 text-center text-gray-400"
         >
-          <p>© {new Date().getFullYear()} Tolarys. Tous droits réservés.</p>
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-4">
+            <p>© {new Date().getFullYear()} Tolarys. Tous droits réservés. SIRET: 94208529100014</p>
+            <div className="flex gap-4">
+              <Link href="/mentions-legales" className="text-gray-400 hover:text-rose-toulouse transition-colors">
+                Mentions légales
+              </Link>
+            </div>
+          </div>
           <p className="mt-2">
             <span className="text-rose-toulouse font-handwriting text-lg">
               Fièrement conçu à Toulouse
