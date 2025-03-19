@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/logo.png', sizes: 'any' },
       { url: '/logo.png', type: 'image/png' },
       { url: '/images/logos/logo.png', type: 'image/png' }
     ],
@@ -99,7 +99,7 @@ export default function RootLayout({
         <link rel="alternate" hrefLang="fr-fr" href="https://tolarys-toulouse.fr" />
         
         {/* Favicons pour tous les navigateurs et appareils */}
-        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" href="/logo.png" sizes="any" />
         <link rel="icon" type="image/png" sizes="32x32" href="/logo.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/logo.png" />
         <link rel="apple-touch-icon" sizes="180x180" href="/logo.png" />
