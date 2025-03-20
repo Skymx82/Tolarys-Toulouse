@@ -49,7 +49,8 @@ export default function MentionsLegales() {
               Le site web <span className="font-semibold">tolarys-toulouse.fr</span> est édité par :
             </p>
             <ul className="list-disc pl-6 mb-6 space-y-2">
-              <li><span className="font-semibold">Raison sociale :</span> Tolarys Toulouse</li>
+              <li><span className="font-semibold">Raison sociale :</span> Mathevon Mattias</li>
+              <li><span className="font-semibold">Nom Commercial :</span> Tolarys</li>
               <li><span className="font-semibold">Numéro SIRET :</span> 94208529100014</li>
               <li><span className="font-semibold">Adresse :</span> Toulouse, France</li>
               <li><span className="font-semibold">Email :</span> tolarystoulouse@gmail.com</li>
