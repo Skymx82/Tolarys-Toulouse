@@ -164,7 +164,7 @@ const projects: Project[] = [
     technologies: ['Prestashop', 'PHP', 'React', 'Stripe'],
     description: 'Site E-commerce de vente de véhicules japonais avec une présentation des produits et des tarifs ainsi qu\'un module de personnalisation.',
     date: '2025-03',
-    url: 'https://prestigear.com/'
+    url: 'https://prestigear.vercel.app/'
   },
 ];
 

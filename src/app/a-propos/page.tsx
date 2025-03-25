@@ -173,7 +173,7 @@ export default function About() {
                 animate={storyIsInView ? "visible" : "hidden"}
               >
                 <span className="text-rose-toulouse text-lg" style={{ fontFamily: 'var(--font-handwriting)' }}>
-                  Notre Histoire
+                  Mon Histoire
                 </span>
                 <h2 
                   className="text-3xl md:text-4xl font-bold text-white"
@@ -183,7 +183,7 @@ export default function About() {
                 </h2>
                 
                 <p className="text-gray-300">
-                  Fondée en 2016 au cœur de la Ville Rose, Tolarys est née de la passion pour le développement web et la 
+                  Fondée en 2025 au cœur de la Ville Rose, Tolarys est née de la passion pour le développement web et la 
                   créativité visuelle. Notre fondateur, originaire de Toulouse, a été profondément inspiré par le patrimoine 
                   culturel riche et l'esprit innovant de la région.
                 </p>
@@ -272,10 +272,10 @@ export default function About() {
                   </div>
                   <div className="ml-auto mr-8 md:mr-16 w-1/2 opacity-0 translate-x-8 timeline-content">
                     <div className="bg-white/5 backdrop-blur-sm p-6 rounded-lg border border-white/10">
-                      <h3 className="text-xl font-bold text-white">2016</h3>
-                      <h4 className="text-rose-toulouse font-medium mb-2">Création de Tolarys</h4>
+                      <h3 className="text-xl font-bold text-white">2017</h3>
+                      <h4 className="text-rose-toulouse font-medium mb-2">Création de mon premier jeu Scratch</h4>
                       <p className="text-gray-300 text-sm">
-                        Fondation de l'agence à Toulouse avec une spécialisation dans le développement web et mobile.
+                        Alors age de 11 ans, j'ai créé mon premier jeu Scratch. Directement passionné par la programmation, j'ai continué de créer des dizaines de jeux Scratch.
                       </p>
                     </div>
                   </div>
@@ -287,10 +287,10 @@ export default function About() {
                   </div>
                   <div className="mr-auto ml-8 md:ml-16 w-1/2 opacity-0 -translate-x-8 timeline-content">
                     <div className="bg-white/5 backdrop-blur-sm p-6 rounded-lg border border-white/10">
-                      <h3 className="text-xl font-bold text-white">2018</h3>
-                      <h4 className="text-violet font-medium mb-2">Expansion de l'équipe</h4>
+                      <h3 className="text-xl font-bold text-white">2021</h3>
+                      <h4 className="text-violet font-medium mb-2">Bac Pro Systèmes Numériques</h4>
                       <p className="text-gray-300 text-sm">
-                        Agrandissement de l'équipe avec l'arrivée de designers et développeurs supplémentaires.
+                        Toujours passionné par la programmation, j'ai décidé de suivre un bac Pro Systèmes Numériques. 
                       </p>
                     </div>
                   </div>
@@ -302,10 +302,10 @@ export default function About() {
                   </div>
                   <div className="ml-auto mr-8 md:mr-16 w-1/2 opacity-0 translate-x-8 timeline-content">
                     <div className="bg-white/5 backdrop-blur-sm p-6 rounded-lg border border-white/10">
-                      <h3 className="text-xl font-bold text-white">2020</h3>
-                      <h4 className="text-bleu font-medium mb-2">Diversification des services</h4>
+                      <h3 className="text-xl font-bold text-white">2024</h3>
+                      <h4 className="text-bleu font-medium mb-2">BTS SIO Slam</h4>
                       <p className="text-gray-300 text-sm">
-                        Extension de notre offre pour inclure le design UX/UI, le marketing digital et les applications mobiles avancées.
+                        A l'issue de mon bac Pro Systèmes Numériques, j'ai décidé de suivre un BTS SIO Slam afin de continuer mon parcours dans le domaine de la programmation.
                       </p>
                     </div>
                   </div>
@@ -317,10 +317,10 @@ export default function About() {
                   </div>
                   <div className="mr-auto ml-8 md:ml-16 w-1/2 opacity-0 -translate-x-8 timeline-content">
                     <div className="bg-white/5 backdrop-blur-sm p-6 rounded-lg border border-white/10">
-                      <h3 className="text-xl font-bold text-white">2023</h3>
-                      <h4 className="text-dore font-medium mb-2">Nouveaux locaux et reconnaissances</h4>
+                      <h3 className="text-xl font-bold text-white">2024</h3>
+                      <h4 className="text-dore font-medium mb-2">Création de Tolarys</h4>
                       <p className="text-gray-300 text-sm">
-                        Emménagement dans de nouveaux locaux au cœur de Toulouse et obtention de plusieurs prix régionaux pour l'innovation digitale.
+                        Création de Tolarys, une agence de programmation et de design.
                       </p>
                     </div>
                   </div>
