@@ -129,7 +129,7 @@ const projects: Project[] = [
   {
     id: 'projet8',
     title: 'Notre site Tolarys avec une vrai DA',
-    category: 'Site Web',
+    category: 'Sites Web',
     image: '/projects/Tolarys.png',
     technologies: ['Nextjs', 'Tailwind CSS', 'Framer Motion'],
     description: 'Notre site web a été réaliser en collaboration avec un artiste afin de faire un site avec une DA tournée autour de toulouse.',
@@ -149,7 +149,7 @@ const projects: Project[] = [
   {
     id: 'projet10',
     title: 'Site web pour AppForge',
-    category: 'Site Web',
+    category: 'Sites Web',
     image: '/projects/AppForge.png',
     technologies: ['Nextjs', 'Tailwind CSS', 'Framer Motion'],
     description: 'Site web réaliser avec une estimation du prix et un portfolio modulable.',
