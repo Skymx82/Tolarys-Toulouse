@@ -156,6 +156,16 @@ const projects: Project[] = [
     date: '2024-10',
     url: 'https://appforge-eight.vercel.app/'
   },
+  {
+    id: 'projet11',
+    title: 'Site E-commerce de vente de véhicules japonais',
+    category: 'E-commerce',
+    image: '/projects/Prestigear.png',
+    technologies: ['Prestashop', 'PHP', 'React', 'Stripe'],
+    description: 'Site E-commerce de vente de véhicules japonais avec une présentation des produits et des tarifs ainsi qu\'un module de personnalisation.',
+    date: '2025-03',
+    url: 'https://prestigear.com/'
+  },
 ];
 
 // Variantes d'animations
