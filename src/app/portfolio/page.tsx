@@ -1,69 +1,160 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+
+// Définition du type pour un projet
+type Project = {
+  id: string;
+  title: string;
+  category: string;
+  image: string;
+  technologies: string[];
+  description: string;
+  date: string; // Format YYYY-MM
+  url: string;
+};
+
+// Fonction pour formater la date (YYYY-MM en mois année)
+const formatDate = (dateString: string): string => {
+  const [year, month] = dateString.split('-');
+  if (!month) return year; // Si seulement l'année est fournie
+  
+  const monthNames = [
+    'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin',
+    'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'
+  ];
+  
+  return `${monthNames[parseInt(month) - 1]} ${year}`;
+};
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
+import Link from 'next/link';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
 // Catégories de projets
-const categories = ['Tous', 'Sites Web', 'Applications Mobiles', 'E-commerce', 'Design'];
+const categories = ['Tous', 'Sites Web', 'Applications Mobiles', 'E-commerce', 'Design', 'SaaS'];
+
+// Dates disponibles pour le filtrage
+const years = ['Toutes', '2025', '2024', '2023'];
+
+const months = [
+  { id: '01', label: 'Janvier' },
+  { id: '02', label: 'Février' },
+  { id: '03', label: 'Mars' },
+  { id: '04', label: 'Avril' },
+  { id: '05', label: 'Mai' },
+  { id: '06', label: 'Juin' },
+  { id: '07', label: 'Juillet' },
+  { id: '08', label: 'Août' },
+  { id: '09', label: 'Septembre' },
+  { id: '10', label: 'Octobre' },
+  { id: '11', label: 'Novembre' },
+  { id: '12', label: 'Décembre' },
+];
 
 // Données des projets (à remplacer par de vraies données)
-const projects = [
+// Les projets seront triés du plus récent au plus ancien par le code
+const projects: Project[] = [
   {
     id: 'projet1',
-    title: 'Site vitrine pour restaurant gastronomique',
-    category: 'Sites Web',
-    image: '/projects/project-placeholder-1.jpg',
-    technologies: ['Next.js', 'Tailwind CSS', 'GSAP'],
-    description: 'Refonte complète du site vitrine pour un restaurant gastronomique toulousain avec réservation en ligne et présentation des menus.',
-    year: '2023'
+    title: 'Maquette de site vitrine pour un restaurant de burgers',
+    category: 'Design',
+    image: '/projects/AfroBurger.png',
+    technologies: ['Figma', 'Illustrator', 'After Effects'],
+    description: 'Maquette de site vitrine pour un restaurant de burgers montalbanais avec réservation en ligne et présentation des menus.',
+    date: '2023-07',
+    url: 'https://www.figma.com/design/gWMeOMOPFMmx4sT9KTgVK0/Afro-Burger-EGR?node-id=0-1&t=dBkkxLjciDcV03L5-1',
   },
   {
     id: 'projet2',
-    title: 'Application de livraison de produits locaux',
-    category: 'Applications Mobiles',
-    image: '/projects/project-placeholder-2.jpg',
-    technologies: ['React Native', 'Firebase', 'Stripe'],
-    description: 'Développement d\'une application mobile permettant aux toulousains de commander des produits frais auprès de producteurs locaux.',
-    year: '2023'
+    title: 'Maquette de site vitrine pour un Camps de vacances basket-ball',
+    category: 'Design',
+    image: '/projects/EldonCamp.png',
+    technologies: ['Figma', 'Illustrator', 'After Effects'],
+    description: 'Maquette de site vitrine pour un Camps de vacances basket-ball avec une présentation des activités et des tarifs.',
+    date: '2023-09',
+    url: 'https://www.figma.com/design/b9iGim4s66YsylVaf8Y1k0/Untitled?node-id=0-1&t=7seVN7EKzJUvzFKO-1',
   },
   {
     id: 'projet3',
-    title: 'E-commerce de vêtements personnalisés',
-    category: 'E-commerce',
-    image: '/projects/project-placeholder-3.jpg',
-    technologies: ['Shopify', 'React', 'Three.js'],
-    description: 'Création d\'une boutique en ligne proposant un outil de personnalisation 3D pour visualiser les vêtements avant achat.',
-    year: '2022'
+    title: 'Portfolio Professionnel pour développeur web',
+    category: 'Sites Web',
+    image: '/projects/PortfolioMattias.png',
+    technologies: ['Next.js', 'Tailwind CSS', 'Framer Motion'],
+    description: 'Portfolio professionnel pour développeur web avec une présentation des projets et des compétences.',
+    date: '2024-09',
+    url: 'https://mattias.netlify.app/'
   },
   {
     id: 'projet4',
-    title: 'Refonte de l\'identité visuelle pour une startup',
+    title: 'Maquette de site vitrine pour une auto-école',
     category: 'Design',
-    image: '/projects/project-placeholder-4.jpg',
+    image: '/projects/Adam.png',
     technologies: ['Figma', 'Illustrator', 'After Effects'],
-    description: 'Création d\'une nouvelle identité de marque complète incluant logo, charte graphique et animations pour les réseaux sociaux.',
-    year: '2022'
+    description: 'Maquette de site vitrine pour une auto-école avec une présentation des activités et des tarifs.',
+    date: '2024-09',
+    url: 'https://www.figma.com/design/XBI7Y44Ev9PGD1KThBKLww/Untitled?node-id=0-1&t=Kw4BTr3kDTH8dGFi-1'
   },
   {
     id: 'projet5',
-    title: 'Plateforme de réservation d\'événements',
+    title: 'Portfolio d\'un étudiant en Graphisme',
     category: 'Sites Web',
-    image: '/projects/project-placeholder-5.jpg',
-    technologies: ['Vue.js', 'Node.js', 'MongoDB'],
-    description: 'Développement d\'une plateforme permettant de découvrir et réserver des événements culturels dans la région toulousaine.',
-    year: '2022'
+    image: '/projects/PortfolioLouis.png',
+    technologies: ['Next.js', 'Tailwind CSS', 'Framer Motion'],
+    description: 'Portfolio d\'un étudiant en Graphisme avec une présentation des projets et des compétences.',
+    date: '2024-11',
+    url: 'https://portfoliolouis.netlify.app/'
   },
   {
     id: 'projet6',
-    title: 'Application de gestion pour cabinet médical',
+    title: 'Application de mise en relation avec les fournisseur chinois',
     category: 'Applications Mobiles',
-    image: '/projects/project-placeholder-6.jpg',
-    technologies: ['Flutter', 'Firebase', 'Django'],
-    description: 'Conception d\'une application mobile et web pour la gestion des rendez-vous et des dossiers patients d\'un cabinet médical.',
-    year: '2021'
+    image: '/projects/BBDBuy.png',
+    technologies: ['ReactNative', 'Firebase', 'Nodejs'],
+    description: 'Application de mise en relation avec les fournisseur chinois avec une présentation des produits et des tarifs.',
+    date: '2024-12',
+    url: 'https://bbdbuy.netlify.app/'
+  },
+  {
+    id: 'projet7',
+    title: 'Site e-commerce de personnalidations de vêtements',
+    category: 'E-commerce',
+    image: '/projects/SmileTex.png',
+    technologies: ['Nextjs', 'Supabase', 'Stripe'],
+    description: 'Site e-commerce de personnalidations de vêtements avec une présentation des produits et des tarifs ainsi qu\'un module de personnalisation.',
+    date: '2025-03',
+    url: 'https://smiletx.vercel.app/'
+  },
+  {
+    id: 'projet8',
+    title: 'Notre site Tolarys avec une vrai DA',
+    category: 'Site Web',
+    image: '/projects/Tolarys.png',
+    technologies: ['Nextjs', 'Tailwind CSS', 'Framer Motion'],
+    description: 'Notre site web a été réaliser en collaboration avec un artiste afin de faire un site avec une DA tournée autour de toulouse.',
+    date: '2025-02',
+    url: 'https://www.tolarys-toulouse.fr/'
+  },
+  {
+    id: 'projet9',
+    title: 'Notre SaaS de gestion des auto-écoles',
+    category: 'SaaS',
+    image: '/projects/TolarysAuto.png',
+    technologies: ['Nextjs', 'Supabase', 'Framer Motion'],
+    description: 'Notre SaaS de gestion des auto-écoles avec une gestion des plainng entre moniteurs, gestion du parc Auto et une gestion des payments.',
+    date: '2025-01',
+    url: 'https://tolarys-auto.vercel.app/'
+  },
+  {
+    id: 'projet10',
+    title: 'Site web pour AppForge',
+    category: 'Site Web',
+    image: '/projects/AppForge.png',
+    technologies: ['Nextjs', 'Tailwind CSS', 'Framer Motion'],
+    description: 'Site web réaliser avec une estimation du prix et un portfolio modulable.',
+    date: '2024-10',
+    url: 'https://appforge-eight.vercel.app/'
   },
 ];
 
@@ -92,17 +183,33 @@ const itemVariants = {
 
 export default function Portfolio() {
   const [selectedCategory, setSelectedCategory] = useState('Tous');
+  const [selectedYear, setSelectedYear] = useState('Toutes');
+  const [selectedMonth, setSelectedMonth] = useState('');
   const [filteredProjects, setFilteredProjects] = useState(projects);
   const [isLoaded, setIsLoaded] = useState(false);
 
-  // Filtrer les projets en fonction de la catégorie sélectionnée
+  // Filtrer les projets en fonction de la catégorie et de l'année sélectionnées
   useEffect(() => {
-    if (selectedCategory === 'Tous') {
-      setFilteredProjects(projects);
-    } else {
-      setFilteredProjects(projects.filter(project => project.category === selectedCategory));
+    let filtered = [...projects]; // Créer une copie pour ne pas modifier l'original
+    
+    // Filtrer par catégorie
+    if (selectedCategory !== 'Tous') {
+      filtered = filtered.filter(project => project.category === selectedCategory);
     }
-  }, [selectedCategory]);
+    
+    // Filtrer par année
+    if (selectedYear !== 'Toutes') {
+      filtered = filtered.filter(project => project.date.startsWith(selectedYear));
+    }
+    
+    // Trier les projets du plus récent au plus ancien
+    filtered.sort((a, b) => {
+      // Comparer les dates directement (format YYYY-MM est déjà trié correctement par ordre lexicographique)
+      return b.date.localeCompare(a.date);
+    });
+    
+    setFilteredProjects(filtered);
+  }, [selectedCategory, selectedYear, selectedMonth]);
 
   // Simuler un chargement pour l'animation initiale
   useEffect(() => {
@@ -111,6 +218,20 @@ export default function Portfolio() {
     }, 500);
     
     return () => clearTimeout(timer);
+  }, []);
+
+  // S'assurer que les projets sont correctement filtrés et triés lors du montage initial
+  useEffect(() => {
+    // Déclencher le filtrage initial et trier du plus récent au plus ancien
+    const initialFiltered = [...projects];
+    
+    // Trier les projets du plus récent au plus ancien
+    initialFiltered.sort((a, b) => {
+      // Comparer les dates directement (format YYYY-MM est déjà trié correctement par ordre lexicographique)
+      return b.date.localeCompare(a.date);
+    });
+    
+    setFilteredProjects(initialFiltered);
   }, []);
 
   return (
@@ -138,27 +259,56 @@ export default function Portfolio() {
             </p>
           </motion.div>
 
-          {/* Filtres de catégories */}
-          <motion.div 
-            className="flex flex-wrap justify-center gap-3 mb-16"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.3, duration: 0.5 }}
-          >
-            {categories.map((category, index) => (
-              <button
-                key={index}
-                onClick={() => setSelectedCategory(category)}
-                className={`px-6 py-2 rounded-full text-sm md:text-base font-medium transition-all duration-300 ${
-                  selectedCategory === category 
-                    ? 'bg-violet text-white shadow-lg shadow-violet/30' 
-                    : 'bg-white/5 text-gray-300 hover:bg-white/10'
-                }`}
-              >
-                {category}
-              </button>
-            ))}
-          </motion.div>
+          {/* Filtres de catégories et d'années */}
+          <div className="space-y-6 mb-16">
+            <motion.div 
+              className="flex flex-wrap justify-center gap-3"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.3, duration: 0.5 }}
+            >
+              <h3 className="w-full text-center text-white text-lg mb-2">Catégories</h3>
+              {categories.map((category, index) => (
+                <button
+                  key={index}
+                  onClick={() => setSelectedCategory(category)}
+                  className={`px-6 py-2 rounded-full text-sm md:text-base font-medium transition-all duration-300 ${
+                    selectedCategory === category 
+                      ? 'bg-violet text-white shadow-lg shadow-violet/30' 
+                      : 'bg-white/5 text-gray-300 hover:bg-white/10'
+                  }`}
+                >
+                  {category}
+                </button>
+              ))}
+            </motion.div>
+            
+            <motion.div 
+              className="flex flex-wrap justify-center gap-3"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.4, duration: 0.5 }}
+            >
+              <h3 className="w-full text-center text-white text-lg mb-2">Années</h3>
+              {years.map((year, index) => (
+                <button
+                  key={index}
+                  onClick={() => {
+                    setSelectedYear(year);
+                    // Réinitialiser le mois sélectionné quand on change d'année
+                    setSelectedMonth('');
+                  }}
+                  className={`px-6 py-2 rounded-full text-sm md:text-base font-medium transition-all duration-300 ${
+                    selectedYear === year 
+                      ? 'bg-rose-toulouse text-white shadow-lg shadow-rose-toulouse/30' 
+                      : 'bg-white/5 text-gray-300 hover:bg-white/10'
+                  }`}
+                >
+                  {year}
+                </button>
+              ))}
+            </motion.div>
+          </div>
 
           {/* Grille de projets */}
           <motion.div 
@@ -167,29 +317,34 @@ export default function Portfolio() {
             initial="hidden"
             animate={isLoaded ? "visible" : "hidden"}
           >
-            <AnimatePresence>
-              {filteredProjects.map((project) => (
+            <AnimatePresence mode="popLayout">
+              {filteredProjects.length > 0 ? filteredProjects.map((project) => (
                 <motion.div
                   key={project.id}
                   variants={itemVariants}
                   layout
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0, scale: 0.9 }}
-                  transition={{ duration: 0.5 }}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ 
+                    type: "spring", 
+                    stiffness: 300, 
+                    damping: 30,
+                    duration: 0.4 
+                  }}
                   className="bg-white/5 backdrop-blur-sm rounded-xl overflow-hidden border border-white/10 hover:border-rose-toulouse/30 transition-all group"
                 >
                   <div className="relative h-56 overflow-hidden">
-                    <div className="w-full h-full bg-gray-800 animate-pulse absolute"></div>
                     <Image
                       src={project.image}
                       alt={project.title}
                       className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-700"
                       width={500}
                       height={300}
+                      priority={true}
                     />
                     <div className="absolute top-4 right-4 bg-black/60 backdrop-blur-sm text-white text-xs px-3 py-1 rounded-full">
-                      {project.year}
+                      {project.date ? formatDate(project.date) : ''}
                     </div>
                   </div>
                   
@@ -215,17 +370,20 @@ export default function Portfolio() {
                     </div>
                     
                     <a 
-                      href={`/portfolio/${project.id}`}
-                      className="inline-flex items-center text-sm font-medium text-violet hover:text-rose-toulouse transition-colors"
+                      href={project.url} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="flex items-center px-4 py-2 bg-gradient-to-r from-rose-toulouse to-violet text-white rounded-lg font-medium text-sm hover:shadow-lg hover:shadow-violet/20 transition-all"
                     >
-                      Voir le projet
+                      Visiter le site
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" viewBox="0 0 20 20" fill="currentColor">
-                        <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                        <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
+                        <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
                       </svg>
                     </a>
                   </div>
                 </motion.div>
-              ))}
+              )) : null}
             </AnimatePresence>
           </motion.div>
           
