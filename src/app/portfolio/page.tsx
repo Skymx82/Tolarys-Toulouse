@@ -166,6 +166,16 @@ const projects: Project[] = [
     date: '2025-03',
     url: 'https://prestigear.vercel.app/'
   },
+  {
+    id: 'projet12',
+    title: 'Site vitrine pour Auto-Ecole',
+    category: 'Sites Web',
+    image: '/projects/autoecole.png',
+    technologies: ['Nextjs', 'Framer', 'Tailwind CSS'],
+    description: 'Site vitrine pour un auto-école avec un espace éléve.',
+    date: '2025-03',
+    url: 'https://auto-ashen.vercel.app/',
+  },
 ];
 
 // Variantes d'animations
