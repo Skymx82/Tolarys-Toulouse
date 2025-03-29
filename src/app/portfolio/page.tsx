@@ -352,7 +352,7 @@ export default function Portfolio() {
                     damping: 30,
                     duration: 0.4 
                   }}
-                  className="bg-white/5 backdrop-blur-sm rounded-xl overflow-hidden border border-white/10 hover:border-rose-toulouse/30 transition-all group"
+                  className="bg-white/5 backdrop-blur-sm rounded-xl overflow-hidden border border-white/10 hover:border-rose-toulouse/30 transition-all group flex flex-col h-full"
                 >
                   <div className="relative h-56 overflow-hidden">
                     <Image
@@ -368,39 +368,43 @@ export default function Portfolio() {
                     </div>
                   </div>
                   
-                  <div className="p-6">
-                    <span className="text-rose-toulouse text-sm font-medium">{project.category}</span>
-                    <h3 className="text-xl font-bold text-white mt-2 mb-3 group-hover:text-rose-toulouse transition-colors">
-                      {project.title}
-                    </h3>
-                    
-                    <p className="text-gray-400 text-sm mb-4 line-clamp-3">
-                      {project.description}
-                    </p>
-                    
-                    <div className="flex flex-wrap gap-2 mb-6">
-                      {project.technologies.map((tech, i) => (
-                        <span 
-                          key={i} 
-                          className="text-xs px-2 py-1 bg-white/10 text-gray-300 rounded"
-                        >
-                          {tech}
-                        </span>
-                      ))}
+                  <div className="p-6 flex flex-col h-[calc(100%-224px)]">
+                    <div className="flex-grow">
+                      <span className="text-rose-toulouse text-sm font-medium">{project.category}</span>
+                      <h3 className="text-xl font-bold text-white mt-2 mb-3 group-hover:text-rose-toulouse transition-colors">
+                        {project.title}
+                      </h3>
+                      
+                      <p className="text-gray-400 text-sm mb-4 line-clamp-3">
+                        {project.description}
+                      </p>
+                      
+                      <div className="flex flex-wrap gap-2 mb-4">
+                        {project.technologies.map((tech, i) => (
+                          <span 
+                            key={i} 
+                            className="text-xs px-2 py-1 bg-white/10 text-gray-300 rounded"
+                          >
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
                     </div>
                     
-                    <a 
-                      href={project.url} 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="flex items-center px-4 py-2 bg-gradient-to-r from-rose-toulouse to-violet text-white rounded-lg font-medium text-sm hover:shadow-lg hover:shadow-violet/20 transition-all"
-                    >
-                      Visiter le site
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" viewBox="0 0 20 20" fill="currentColor">
-                        <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
-                        <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
-                      </svg>
-                    </a>
+                    <div className="mt-auto">
+                      <a 
+                        href={project.url} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="flex items-center px-4 py-2 bg-gradient-to-r from-rose-toulouse to-violet text-white rounded-lg font-medium text-sm hover:shadow-lg hover:shadow-violet/20 transition-all"
+                      >
+                        Visiter le site
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" viewBox="0 0 20 20" fill="currentColor">
+                          <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
+                          <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
+                        </svg>
+                      </a>
+                    </div>
                   </div>
                 </motion.div>
               )) : null}
