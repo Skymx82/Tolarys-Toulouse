@@ -32,8 +32,8 @@ const officeLocations = [
   {
     city: 'Toulouse',
     address: '15 Rue des Fleurs, 31000 Toulouse',
-    phone: '+33 5 61 23 45 67',
-    email: 'toulouse@tolarys.fr',
+    phone: '+33 6 79 33 68 12',
+    email: 'tolarystoulouse@gmail.com',
     hours: 'Lun - Ven: 9h - 18h'
   }
 ];
