@@ -230,7 +230,7 @@ const projects: Project[] = [
     id: 'projet18',
     title: 'Site vitrine pour Sport Club à Orléans',
     category: 'Sites Web',
-    image: '/projects/SportClub.png',
+    image: '/projects/Sportclub.png',
     technologies: ['Nextjs', 'Framer', 'Tailwind CSS'],
     description: 'Site vitrine pour un club sportif avec module de réservation.',
     date: '2025-05',
@@ -245,6 +245,16 @@ const projects: Project[] = [
     description: 'Site vitrine pour un revendeur de porsche et préparation des véhicules.',
     date: '2025-05',
     url: 'https://porschealmeras.vercel.app/',
+  },
+  {
+    id: 'projet20',
+    title: 'Site E-commerce pour un concessionnaire de voitures',
+    category: 'E-commerce',
+    image: '/projects/Rlauto.png',
+    technologies: ['Nextjs', 'Framer', 'Tailwind CSS'],
+    description: 'Site E-commerce pour un concessionnaire de voitures.',
+    date: '2025-05',
+    url: 'https://rl-auto-maquette.vercel.app/fr',
   },
 ];
 
