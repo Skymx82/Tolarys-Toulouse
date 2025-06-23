@@ -216,6 +216,16 @@ const projects: Project[] = [
     date: '2025-04',
     url: 'https://laurent-sas-mahieux.vercel.app/',
   },
+  {
+    id: 'projet17',
+    title: 'Site vitrine pour une salle de sport',
+    category: 'Sites Web',
+    image: '/projects/Gymclub.png',
+    technologies: ['Nextjs', 'Framer', 'Tailwind CSS'],
+    description: 'Site vitrine pour une salle de sport avec module de réservation.',
+    date: '2025-04',
+    url: 'https://gymclub45.vercel.app/',
+  },
 ];
 
 // Variantes d'animations
