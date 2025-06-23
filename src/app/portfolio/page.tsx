@@ -176,6 +176,16 @@ const projects: Project[] = [
     date: '2025-03',
     url: 'https://auto-ashen.vercel.app/',
   },
+  {
+    id: 'projet13',
+    title: 'Site vitrine pour JsBarber',
+    category: 'Sites Web',
+    image: '/projects/JsBarber.png',
+    technologies: ['Nextjs', 'Framer', 'Tailwind CSS'],
+    description: 'Site vitrine pour un barbier avec module de réservation.',
+    date: '2025-04',
+    url: 'https://jsbarber.vercel.app/',
+  },
 ];
 
 // Variantes d'animations
