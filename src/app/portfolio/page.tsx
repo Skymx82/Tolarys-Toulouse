@@ -236,6 +236,16 @@ const projects: Project[] = [
     date: '2025-05',
     url: 'https://sportclub45.vercel.app/',
   },
+  {
+    id: 'projet19',
+    title: 'Site vitrine pour Porsche Almeras',
+    category: 'Sites Web',
+    image: '/projects/Porsche.png',
+    technologies: ['Nextjs', 'Framer', 'Tailwind CSS'],
+    description: 'Site vitrine pour un revendeur de porsche et préparation des véhicules.',
+    date: '2025-05',
+    url: 'https://porschealmeras.vercel.app/',
+  },
 ];
 
 // Variantes d'animations
