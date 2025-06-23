@@ -186,6 +186,16 @@ const projects: Project[] = [
     date: '2025-04',
     url: 'https://jsbarber.vercel.app/',
   },
+  {
+    id: 'projet14',
+    title: 'Site vitrine pour Etincelle Coworking',
+    category: 'Sites Web',
+    image: '/projects/Etincelle.png',
+    technologies: ['Nextjs', 'Framer', 'Tailwind CSS'],
+    description: 'Site vitrine pour un coworking avec module de réservation.',
+    date: '2025-04',
+    url: 'https://etincelle-coworking.vercel.app/',
+  },
 ];
 
 // Variantes d'animations
