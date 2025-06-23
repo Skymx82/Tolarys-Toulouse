@@ -256,6 +256,16 @@ const projects: Project[] = [
     date: '2025-05',
     url: 'https://rl-auto-maquette.vercel.app/fr',
   },
+  {
+    id: 'projet21',
+    title: 'Site vitrine pour une entreprise de location de Remorque',
+    category: 'Sites Web',
+    image: '/projects/Plr.png',
+    technologies: ['Nextjs', 'Framer', 'Tailwind CSS'],
+    description: 'Site vitrine pour une entreprise de location de Remorque.',
+    date: '2025-05',
+    url: 'https://plr-orleans.vercel.app/',
+  },
 ];
 
 // Variantes d'animations
