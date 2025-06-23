@@ -213,7 +213,7 @@ const projects: Project[] = [
     image: '/projects/Laurent.png',
     technologies: ['Nextjs', 'Framer', 'Tailwind CSS'],
     description: 'Site vitrine pour une entreprise de paysage avec module de visualisation avant/après.',
-    date: '2025-04',
+    date: '2025-05',
     url: 'https://laurent-sas-mahieux.vercel.app/',
   },
   {
@@ -223,8 +223,18 @@ const projects: Project[] = [
     image: '/projects/Gymclub.png',
     technologies: ['Nextjs', 'Framer', 'Tailwind CSS'],
     description: 'Site vitrine pour une salle de sport avec module de réservation.',
-    date: '2025-04',
+    date: '2025-05',
     url: 'https://gymclub45.vercel.app/',
+  },
+  {
+    id: 'projet18',
+    title: 'Site vitrine pour Sport Club à Orléans',
+    category: 'Sites Web',
+    image: '/projects/SportClub.png',
+    technologies: ['Nextjs', 'Framer', 'Tailwind CSS'],
+    description: 'Site vitrine pour un club sportif avec module de réservation.',
+    date: '2025-05',
+    url: 'https://sportclub45.vercel.app/',
   },
 ];
 
